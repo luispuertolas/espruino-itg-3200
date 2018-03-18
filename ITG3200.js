@@ -45,11 +45,11 @@ ITG3200.prototype.r = function () {
 // raw angles data without offset substraction
 ITG3200.prototype.getRawAnglesValues = function () {
   this.i2c.writeTo(this.address, ITG3200.X_MSB_BUF);
-  var d = this.i2c.readFrom(this.address, ITG3200.ANGLES_BIT_NUM);
+  var d = this.getRawAnglesValues();
   return {
-    x:    ITG3200.fromTwoComplement(d[0], d[1]),
-    y:    ITG3200.fromTwoComplement(d[2], d[3]),
-    z:    ITG3200.fromTwoComplement(d[4], d[5]),
+    x:    d.x,
+    y:    d.y,
+    z:    d.z,
   };
 };
 
@@ -58,9 +58,9 @@ ITG3200.prototype.read = function () {
   this.i2c.writeTo(this.address, ITG3200.TEMPERATURE_MSB_BUF);
   var d = this.i2c.readFrom(this.address, ITG3200.ALL_DATA_BIT_NUM);
   return {
-    x:    (ITG3200.fromTwoComplement(d[2], d[3]) - 0) / ITG3200.SENSITIVITY,
-    y:    (ITG3200.fromTwoComplement(d[4], d[5]) - 0) / ITG3200.SENSITIVITY,
-    z:    (ITG3200.fromTwoComplement(d[6], d[7]) - 0) / ITG3200.SENSITIVITY,
+    x:    (ITG3200.fromTwoComplement(d[2], d[3]) - this.xOffset) / ITG3200.SENSITIVITY,
+    y:    (ITG3200.fromTwoComplement(d[4], d[5]) - this.yOffset) / ITG3200.SENSITIVITY,
+    z:    (ITG3200.fromTwoComplement(d[6], d[7]) - this.zOffset) / ITG3200.SENSITIVITY,
     temp: 35 + (ITG3200.fromTwoComplement(d[0], d[1])+ 13200) / 280
   };
 };
