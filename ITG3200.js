@@ -63,6 +63,8 @@ ITG3200.prototype.read = function () {
     z:    (ITG3200.fromTwoComplement(d[6], d[7]) - this.zOffset) / ITG3200.SENSITIVITY,
     temp: 35 + (ITG3200.fromTwoComplement(d[0], d[1])+ 13200) / 280
   };
+  console.log(This.x);
+  console.log(" ");
 };
 
 // Internal API: Read one byte from register reg
