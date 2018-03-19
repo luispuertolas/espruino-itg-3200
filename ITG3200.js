@@ -1,7 +1,3 @@
-var state = false;
-Serial4.setup(9600);
-Serial4.setConsole();
-
 function ITG3200(i2c, options) {
   this.i2c = I2C;
   this.address = (options && options.address) || ITG3200.DEFAULT_ADDRESS;
