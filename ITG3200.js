@@ -58,9 +58,9 @@ ITG3200.prototype.read = function () {
   this.i2c.writeTo(this.address, ITG3200.TEMPERATURE_MSB_BUF);
   var d = this.i2c.readFrom(this.address, ITG3200.ALL_DATA_BIT_NUM);
   return {
-    x:    (ITG3200.fromTwoComplement(d[2], d[3]) ) / ITG3200.SENSITIVITY,
-    y:    (ITG3200.fromTwoComplement(d[4], d[5]) ) / ITG3200.SENSITIVITY,
-    z:    (ITG3200.fromTwoComplement(d[6], d[7]) ) / ITG3200.SENSITIVITY,
+    x:    (ITG3200.fromTwoComplement(d[2], d[3]) - this.xOffset) / ITG3200.SENSITIVITY,
+    y:    (ITG3200.fromTwoComplement(d[4], d[5]) - this.yOffset) / ITG3200.SENSITIVITY,
+    z:    (ITG3200.fromTwoComplement(d[6], d[7]) - this.zOffset) / ITG3200.SENSITIVITY,
     temp: 35 + (ITG3200.fromTwoComplement(d[0], d[1])+ 13200) / 280
   };
 };
