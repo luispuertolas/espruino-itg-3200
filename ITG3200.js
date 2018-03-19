@@ -1,5 +1,5 @@
 function ITG3200(i2c, options) {
-  this.i2c = new I2C;
+  this.i2c = new I2C();
   this.address = (options && options.address) || ITG3200.DEFAULT_ADDRESS;
 
   this.xOffset = 0;
