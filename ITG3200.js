@@ -29,10 +29,6 @@ ITG3200.prototype.calibrateOffset = function () {
 
 // debug function
 ITG3200.prototype.r = function () {
-  console.log(this.read8(ITG3200.SMPLRT_DIV));
-  console.log(this.read8(ITG3200.PWR_MGM));
-  console.log(this.read8(ITG3200.INT_CFG));
-  console.log(this.read8(ITG3200.DLPF_FS));
 };
 
 // raw angles data without offset substraction
